@@ -1,10 +1,14 @@
-import React from 'react';
+import React, {FC} from 'react';
 import styles from './PosterPreviewComponent.module.css'
 
-const PosterPreviewComponent = () => {
+interface IProps {
+    movie: any
+}
+
+const PosterPreviewComponent:FC<IProps> = ({movie}) => {
     return (
         <div className={styles.PosterPreviewComponent}>
-            PosterPreviewComponent
+
         </div>
     );
 };
