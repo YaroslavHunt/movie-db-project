@@ -1,19 +1,26 @@
 .container {
     position: relative;
+    width: fit-content;
+    margin: 0 auto;
 }
 
 .toggle_button {
-    background-color: darkgrey;
+    background-color: #444;
     color: #ffffff;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
+    border: 2px solid #666;
+    padding: 8px 20px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s, transform 0.2s;
     display: flex;
     align-items: center;
     font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s, border-color 0.3s;
+}
+
+.toggle_button:hover {
+    background-color: #555;
+    border-color: #888;
 }
 
 .toggle_button span {
@@ -32,54 +39,56 @@
 }
 
 .genre_list {
-    margin-top: 2px ;
-    width: 15vw;
+    margin-top: 4px;
+    width: 100%;
     max-height: 0;
     overflow: hidden;
-    background-color: darkgrey;
+    background-color: #444;
     color: #ffffff;
-    border: none;
-    border-radius: 4px;
-    transition: max-height 0.3s ease-in;
+    border: 2px solid #666;
+    border-radius: 8px;
+    transition: max-height 0.3s ease-in, opacity 0.3s;
+    opacity: 0;
 }
 
 .genre_list.open {
-    width: 15vw;
     max-height: 200px;
+    opacity: 1;
     overflow-y: auto;
 }
 
-.genreList::-webkit-scrollbar {
+.genre_list::-webkit-scrollbar {
     width: 8px;
 }
 
-.genreList::-webkit-scrollbar-track {
+.genre_list::-webkit-scrollbar-track {
     background: #333;
     border-radius: 4px;
 }
 
-.genreList::-webkit-scrollbar-thumb {
-    background: #555;
+.genre_list::-webkit-scrollbar-thumb {
+    background: #777;
     border-radius: 4px;
 }
 
-.genreList::-webkit-scrollbar-thumb:hover {
-    background: #777;
+.genre_list::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
 }
 
 .genre_item {
-    padding: 8px 12px;
-    border-bottom: 1px solid #ddd;
+    padding: 10px 14px;
+    border-bottom: 1px solid #555;
     cursor: pointer;
     font-size: 14px;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .genre_item:hover {
     background-color: #333;
-    color: #fff;
+    color: palevioletred;
 }
 
 .genre_item:last-child {
     border-bottom: none;
 }
+
