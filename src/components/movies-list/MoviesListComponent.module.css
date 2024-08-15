@@ -1,0 +1,23 @@
+.movies_list_component {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-auto-rows: 1fr;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    align-items: stretch;
+    height: 100%;
+}
+
+@media (max-width: 768px) {
+    .movies_list_component {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
+
+.movies_list_card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}

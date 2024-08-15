@@ -1,26 +1,17 @@
 import React, {FC} from 'react';
 import styles from './MoviesListCardComponent.module.css'
 import Link from "next/link";
-import {IMovie} from "@/models/IMovie";
+import {imgUrl} from "@/constants/constants";
+import {IResMovieProps} from "@/interfaces/interfaces";
 
-interface Params {
-    searchParams: {
-        data?:string
-        id?: string;
-    }
-}
 
-interface IProps {
-    movie: IMovie
-}
-
-const MoviesListCardComponent:FC<IProps> = ({movie}) => {
+const MoviesListCardComponent:FC<IResMovieProps> = ({movie}) => {
     return (
-        <div className={styles.MoviesListCardComponent}>
+        <div className={styles.movies_list_card}>
             <Link href={{
                 pathname: '/movie/' + movie.id,
                 query: {data: JSON.stringify(movie)}
-            }}>{movie.original_title}</Link>
+            }}><img src={imgUrl + movie.poster_path} alt={movie.title}/>{movie.original_title}</Link>
         </div>
     );
 };

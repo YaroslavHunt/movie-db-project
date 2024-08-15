@@ -1,5 +1,7 @@
 const baseUrl = 'https://api.themoviedb.org/3';
 
+const imgUrl = 'https://image.tmdb.org/t/p/w500';
+
 const options = {
     method: 'GET',
     headers: {
@@ -10,5 +12,6 @@ const options = {
 
 export {
     baseUrl,
+    imgUrl,
     options
 }

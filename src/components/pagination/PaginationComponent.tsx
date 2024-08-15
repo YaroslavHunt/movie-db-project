@@ -1,10 +1,25 @@
-import React from 'react';
-import styles from './PaginationComponent.module.css'
+import React, { FC } from 'react';
+import styles from './PaginationComponent.module.css';
+import Link from 'next/link';
+import {PaginationProps} from "@/interfaces/interfaces";
 
-const PaginationComponent = () => {
+const PaginationComponent: FC<PaginationProps> = ({ currentPage, totalPages }) => {
+    const previousPage = currentPage > 1 ? currentPage - 1 : null;
+    const nextPage = currentPage < totalPages ? currentPage + 1 : null;
+
     return (
-        <div className={styles.PaginationComponent}>
-            PaginationComponent
+        <div className={styles.pagination}>
+            {previousPage && (
+                <Link href={'?page=' + previousPage}>
+                    <button>&#8249;</button>
+                </Link>
+            )}
+            <span><a>{currentPage}</a></span>
+            {nextPage && (
+                <Link href={'?page=' + nextPage}>
+                    <button>&#8250;</button>
+                </Link>
+            )}
         </div>
     );
 };

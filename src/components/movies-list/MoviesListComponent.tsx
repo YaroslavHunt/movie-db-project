@@ -1,21 +1,18 @@
 import React, {FC} from 'react';
 import styles from './MoviesListComponent.module.css'
-import {IMovie} from "@/models/IMovie";
 import MoviesListCardComponent from "@/components/movies-list-card/MoviesListCardComponent";
+import {Interfaces} from "@/interfaces/interfaces";
 
-interface IProps {
-    movies: IMovie[];
-}
 
-const MoviesListComponent:FC<IProps> = async ({movies}) => {
+const MoviesListComponent:FC<Interfaces> = (results) => {
+
+    let res = results.results;
 
     return (
         <div className={styles.movies_list_component}>
-            <ul>
                 {
-                    movies.map(movie => <MoviesListCardComponent movie={movie} key={movie.id}/>)
+                    res.map(movie => <MoviesListCardComponent movie={movie} key={movie.id}/>)
                 }
-            </ul>
         </div>
     );
 };

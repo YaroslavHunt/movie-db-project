@@ -1,21 +1,23 @@
-import {IMovie} from "@/models/IMovie";
-import {baseUrl, options} from "@/constants/constants";
+import {baseUrl, imgUrl, options} from "@/constants/constants";
+import {IResMovieProps, Interfaces} from "@/interfaces/interfaces";
 
-const getAllMovies = async (): Promise<IMovie[]>  => {
+const getAllMovies = async (page: number = 1): Promise<Interfaces>  => {
 
-    let response = await fetch(baseUrl + '/discover/movie',
+
+    let response:Interfaces = await fetch(baseUrl + '/discover/movie?page=' + page,
         options).then(res => res.json());
-    console.log(response.results)
 
-    return response.results;
+    // console.log(response)
+    return response;
+
 }
 
-const getMovieById = async (id: number): Promise<{ movie: IMovie, posterUrl: string, backdropUrl: string }> => {
+const getMovieById = async (id: number): Promise<IResMovieProps> => {
     let response = await fetch(baseUrl + '/movie/' + id,
         options).then((res) => res.json());
 
-    const posterUrl = `https://image.tmdb.org/t/p/w500${response.poster_path}`;
-    const backdropUrl = `https://image.tmdb.org/t/p/w500${response.backdrop_path}`;
+    const posterUrl = `${imgUrl}${response.belongs_to_collection.poster_path}`; //todo
+    const backdropUrl = `${imgUrl}${response.belongs_to_collection.backdrop_path}`;
 
     return {
         ...response,
