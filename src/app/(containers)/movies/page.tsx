@@ -1,21 +1,21 @@
 import React from 'react';
-import { getAllMovies } from "@/services/api.service";
+import { getMoviesByPage } from "@/services/api.service";
 import styles from './page.module.css';
 import MoviesListComponent from "@/components/movies-list/MoviesListComponent";
-import PaginationComponent from "@/components/pagination/PaginationComponent";
+import MoviesPaginationComponent from "@/components/pagination/MoviesPaginationComponent";
 
-interface MoviesPageProps {
+interface Params {
     searchParams: { page?: string };
 }
 
-const MoviesPage = async ({ searchParams }: MoviesPageProps) => {
+const MoviesPage = async ({ searchParams }: Params) => {
     const currentPage = searchParams.page ? +searchParams.page : 1;
-    const movies = await getAllMovies(currentPage);
+    const movies = await getMoviesByPage(currentPage);
 
     return (
         <div className={styles.movies_page}>
             <MoviesListComponent results={movies.results} />
-            <PaginationComponent
+            <MoviesPaginationComponent
                 currentPage={currentPage}
                 totalPages={movies.total_pages || 1}
             />

@@ -1,5 +1,5 @@
 import styles from './page.module.css'
-import {getAllMovies} from "@/services/api.service";
+import {getMoviesByPage} from "@/services/api.service";
 
 export default function Home() {
   return (

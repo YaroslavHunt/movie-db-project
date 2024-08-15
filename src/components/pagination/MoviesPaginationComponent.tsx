@@ -3,7 +3,7 @@ import styles from './PaginationComponent.module.css';
 import Link from 'next/link';
 import {PaginationProps} from "@/interfaces/interfaces";
 
-const PaginationComponent: FC<PaginationProps> = ({ currentPage, totalPages }) => {
+const MoviesPaginationComponent: FC<PaginationProps> = ({ currentPage, totalPages }) => {
     const previousPage = currentPage > 1 ? currentPage - 1 : null;
     const nextPage = currentPage < totalPages ? currentPage + 1 : null;
 
@@ -24,4 +24,4 @@ const PaginationComponent: FC<PaginationProps> = ({ currentPage, totalPages }) =
     );
 };
 
-export default PaginationComponent;
+export default MoviesPaginationComponent;

@@ -1,4 +1,5 @@
 import {IMovie} from "@/models/IMovie";
+import {IGenre} from "@/models/IGenre";
 
 export interface Interfaces {
     results: IMovie[],
@@ -14,7 +15,8 @@ export interface IResMovieProps {
 }
 
 export interface PaginationProps {
-    currentPage: number;
-    totalPages: number;
+    genre: IGenre[]
+    currentPage: number,
+    totalPages: number
 }
 

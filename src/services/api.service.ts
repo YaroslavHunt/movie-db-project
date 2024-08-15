@@ -1,10 +1,10 @@
 import {baseUrl, imgUrl, options} from "@/constants/constants";
-import {IResMovieProps, Interfaces} from "@/interfaces/interfaces";
+import {Interfaces, IResMovieProps} from "@/interfaces/interfaces";
+import {IGenre} from "@/models/IGenre";
 
-const getAllMovies = async (page: number = 1): Promise<Interfaces>  => {
+const getMoviesByPage = async (page: number = 1): Promise<Interfaces>  => {
 
-
-    let response:Interfaces = await fetch(baseUrl + '/discover/movie?page=' + page,
+    const response:Interfaces = await fetch(baseUrl + '/discover/movie?page=' + page,
         options).then(res => res.json());
 
     // console.log(response)
@@ -12,12 +12,20 @@ const getAllMovies = async (page: number = 1): Promise<Interfaces>  => {
 
 }
 
+const getAllMoviesByGenre = async (genreId: string, page: number = 1): Promise<Interfaces> => {
+    const response:Interfaces = await fetch(baseUrl + '/discover/movie?with_genres=' + genreId + '&page=' + page,
+        options).then(res => res.json());
+
+
+    return response;
+}
+
 const getMovieById = async (id: number): Promise<IResMovieProps> => {
     let response = await fetch(baseUrl + '/movie/' + id,
         options).then((res) => res.json());
 
-    const posterUrl = `${imgUrl}${response.belongs_to_collection.poster_path}`; //todo
-    const backdropUrl = `${imgUrl}${response.belongs_to_collection.backdrop_path}`;
+    const posterUrl = `${imgUrl}${response.belongs_to_collection?.poster_path || response.poster_path}`;
+    const backdropUrl = `${imgUrl}${response.belongs_to_collection?.backdrop_path || response.backdrop_path}`;
 
     return {
         ...response,
@@ -26,9 +34,14 @@ const getMovieById = async (id: number): Promise<IResMovieProps> => {
     };
 }
 
-// const getGenres = async (): Promise<IGenre[]> => {}
+const getGenres = async (): Promise<IGenre[]> => {
+    let response = await fetch(baseUrl + '/genre/movie/list', options).then(res => res.json());
+    return response.genres;
+}
 
 export {
-    getAllMovies,
-    getMovieById
+    getAllMoviesByGenre,
+    getMoviesByPage,
+    getMovieById,
+    getGenres
 }

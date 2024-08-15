@@ -1,0 +1,85 @@
+.container {
+    position: relative;
+}
+
+.toggle_button {
+    background-color: darkgrey;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+.toggle_button span {
+    margin-right: 8px;
+    font-size: 10px;
+}
+
+.toggle_button_link {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.toggle_button_link:hover {
+    transform: scale(1.05);
+    color: palevioletred;
+}
+
+.genre_list {
+    margin-top: 2px ;
+    width: 15vw;
+    max-height: 0;
+    overflow: hidden;
+    background-color: darkgrey;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    transition: max-height 0.3s ease-in;
+}
+
+.genre_list.open {
+    width: 15vw;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.genreList::-webkit-scrollbar {
+    width: 8px;
+}
+
+.genreList::-webkit-scrollbar-track {
+    background: #333;
+    border-radius: 4px;
+}
+
+.genreList::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 4px;
+}
+
+.genreList::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}
+
+.genre_item {
+    padding: 8px 12px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.genre_item:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+.genre_item:last-child {
+    border-bottom: none;
+}

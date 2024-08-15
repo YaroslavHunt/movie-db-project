@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './HeaderComponent.module.css';
 import Link from "next/link";
+import AllGenresServer from "@/app/(server)/genres/AllGenresServer";
 
 const HeaderComponent = () => {
     return (
@@ -12,6 +13,7 @@ const HeaderComponent = () => {
                 <li>
                     <Link href={'/movies'}>movies</Link>
                 </li>
+                <AllGenresServer/>
             </ul>
         </div>
     );
