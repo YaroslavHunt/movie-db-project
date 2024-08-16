@@ -1,9 +1,8 @@
 import React from 'react';
 import {Metadata} from "next";
-import HeaderComponent from "@/components/header/HeaderComponent";
 
 export const metadata: Metadata = {
-    title: "Movie"
+    title: 'Movie'
 }
 
 type Props = {children: React.ReactNode};

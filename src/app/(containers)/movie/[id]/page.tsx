@@ -1,5 +1,7 @@
 import React from 'react';
 import {getMovieById} from "@/services/api.service";
+import PosterPreviewComponent from "@/components/poster-preview/PosterPreviewComponent";
+import styles from './page.module.css';
 
 interface Params {
     searchParams: {
@@ -10,21 +12,19 @@ interface Params {
 
 const MoviePage = async ({searchParams}: Params) => {
 
-    let movie1;
+    let movie;
 
     if(searchParams && searchParams.data) {
-        movie1 = JSON.parse(searchParams.data)
+        movie = JSON.parse(searchParams.data)
     }
+    const {posterUrl} = await getMovieById(+movie.id);
 
-    const {movie, posterUrl, backdropUrl} = await getMovieById(+movie1.id);
 
     return (
-        <div>
-            <img src={posterUrl} alt={movie1.title}/>
+        <div className={styles.movie_page}>
+            <PosterPreviewComponent movie={movie} posterUrl={posterUrl}/>
         </div>
     );
 };
 
 export default MoviePage;
-
-//todo

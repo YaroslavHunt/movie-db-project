@@ -1,14 +1,17 @@
 import React, {FC} from 'react';
 import styles from './PosterPreviewComponent.module.css'
+import {imgUrl} from "@/constants/constants";
+import {IMovie} from "@/models/IMovie";
 
-interface IProps {
-    movie: any
+interface Props {
+    movie:IMovie
+    posterUrl?:string
 }
 
-const PosterPreviewComponent:FC<IProps> = ({movie}) => {
+const PosterPreviewComponent:FC<Props> = ({movie, posterUrl}) => {
     return (
-        <div className={styles.PosterPreviewComponent}>
-
+        <div className={styles.poster_preview_component}>
+            <img src={`${imgUrl}${posterUrl}`} alt={movie.title}/>
         </div>
     );
 };
