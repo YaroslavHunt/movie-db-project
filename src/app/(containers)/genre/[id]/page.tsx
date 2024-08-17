@@ -25,8 +25,6 @@ const GenrePage = async ({searchParams}: Params) => {
     const moviesResponse = await getAllMoviesByGenre(genre.id, currentPage);
     const moviesByGenre: IMovie[] = moviesResponse.results;
 
-    console.log(moviesByGenre)
-
 
     return (
         <div>

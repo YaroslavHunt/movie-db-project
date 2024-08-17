@@ -4,7 +4,7 @@ import styles from "./FooterComponent.module.css";
 const FooterComponent = () => {
     return (
         <div className={styles.FooterComponent}>
-            FooterComponent
+            <h5>@ Movies Corp</h5>
         </div>
     );
 };

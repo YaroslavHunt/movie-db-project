@@ -3,7 +3,7 @@ import {IGenre} from "@/models/IGenre";
 
 export interface Interfaces {
     results: IMovie[],
-    page?: number,
+    page?: number ,
     total_pages?: number,
     total_results?: number
 }
@@ -19,4 +19,5 @@ export interface PaginationProps {
     currentPage: number,
     totalPages: number
 }
+
 
