@@ -1,34 +1,42 @@
 import {baseUrl, imgUrl, options} from "@/constants/constants";
-import {Interfaces, IResMovieProps} from "@/interfaces/interfaces";
+import {Interfaces, IResMovieProps, totalPagesProps} from "@/interfaces/interfaces";
 import {IGenre} from "@/models/IGenre";
 import {IMovie} from "@/models/IMovie";
 
 interface Props {
-    allMovies: IMovie[],
+    allMovies: IMovie[]
     topRatedMovies: IMovie[]
+}
+
+const getTotalPages = async ():Promise<totalPagesProps> => {
+    const response = await fetch(baseUrl + '/discover/movie', options)
+        .then(res => res.json())
+    return response.total_pages;
 }
 
 const getAllMovies = async (page: number = 1, results: Interfaces): Promise<Props> => {
     const allMovies: IMovie[] = [];
 
-    for (let i = page; i <= results.total_pages; i++) {
-        try {
-            const response = await fetch(baseUrl + '/discover/movie?page=' + i, options)
-                .then(res => {
-                    if (!res.ok) {
-                        throw new Error(`HTTP error! status: ${res.status}`);
-                    }
-                    return res.json();
-                });
+    if (results && results.total_pages) {
+        for (let i = page; i <= results.total_pages; i++) {
+            try {
+                const response = await fetch(baseUrl + '/discover/movie?page=' + i, options)
+                    .then(res => {
+                        if (!res.ok) {
+                            throw new Error(`HTTP error! status: ${res.status}`);
+                        }
+                        return res.json();
+                    });
 
-            if (!response.results || !Array.isArray(response.results)) {
-                throw new Error('Results are missing or undefined in the response.');
+                if (!response.results || !Array.isArray(response.results)) {
+                    throw new Error('Results are missing or undefined in the response.');
+                }
+
+                allMovies.push(...response.results);
+            } catch (error) {
+                console.error('Failed to fetch movies:', error);
+                break;
             }
-
-            allMovies.push(...response.results);
-        } catch (error) {
-            console.error('Failed to fetch movies:', error);
-            break;
         }
     }
     const sortedMovies = allMovies.length > 0 ?
@@ -80,6 +88,7 @@ const getGenres = async (): Promise<IGenre[]> => {
 
 
 export {
+    getTotalPages,
     getAllMovies,
     getAllMoviesByGenre,
     getMoviesByPage,

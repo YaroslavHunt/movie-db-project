@@ -2,7 +2,6 @@ import React, {FC} from 'react';
 import styles from "./GenreBadgeComponent.module.css";
 import {IGenre} from "@/models/IGenre";
 import Link from "next/link";
-import {getGenres} from "@/services/api.service";
 
 interface Props {
     genres: IGenre[];

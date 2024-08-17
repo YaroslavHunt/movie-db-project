@@ -8,6 +8,10 @@ export interface Interfaces {
     total_results?: number
 }
 
+export interface totalPagesProps extends Interfaces{
+    total_pages: number,
+}
+
 export interface IResMovieProps {
     movie: IMovie,
     posterUrl?: string,

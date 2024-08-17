@@ -15,9 +15,8 @@
 }
 
 .pagination button {
-    background-color: darkgrey;
+    background-color: #444;
     color: #ffffff;
-    border: none;
     padding: 8px 16px;
     border-radius: 4px;
     cursor: pointer;
@@ -26,7 +25,7 @@
 }
 
 .pagination button:hover {
-    background-color: grey;
+    background-color: #555;
     transform: scale(1.05);
 }
 

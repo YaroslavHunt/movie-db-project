@@ -1,6 +1,6 @@
 import {IGenre} from "@/models/IGenre";
 
-export interface IMovie {
+export interface IMovie{
     adult: boolean,
     backdrop_path: string,
     belongs_to_collection?: {

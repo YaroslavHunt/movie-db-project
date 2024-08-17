@@ -1,0 +1,32 @@
+.header_button {
+    background-color: #444;
+    color: #ffffff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s, border-color 0.3s;
+}
+
+.header_button:hover {
+    background-color: #555;
+}
+
+.header_button span {
+    margin-right: 8px;
+    font-size: 10px;
+}
+
+.header_button_link {
+    text-decoration: none;
+    color: white;
+}
+
+.header_button_link:hover {
+    transform: scale(1.05);
+    color: palevioletred;
+}
