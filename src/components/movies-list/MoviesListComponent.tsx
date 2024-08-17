@@ -9,7 +9,7 @@ const MoviesListComponent:FC<Interfaces> = (results) => {
     let res = results.results;
 
     return (
-        <div className={styles.movies_list_component}>
+        <div className={styles.movies_list_container}>
                 {
                     res.map(movie => <MoviesListCardComponent movie={movie} key={movie.id}/>)
                 }

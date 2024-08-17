@@ -35,11 +35,12 @@
 
 .toggle_button_link:hover {
     transform: scale(1.05);
-    color: palevioletred;
 }
 
 .genre_list {
-    margin-top: 4px;
+    position: absolute;
+    top: 100%;
+    left: 0;
     width: 100%;
     max-height: 0;
     overflow: hidden;
@@ -49,6 +50,7 @@
     border-radius: 4px;
     transition: max-height 0.3s ease-in, opacity 0.3s;
     opacity: 0;
+    z-index: 1000;
 }
 
 .genre_list.open {
@@ -91,4 +93,5 @@
 .genre_item:last-child {
     border-bottom: none;
 }
+
 

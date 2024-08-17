@@ -15,6 +15,7 @@ type PropType = {
   children: React.ReactNode;
 }
 
+
 export default function RootLayout({children}: Readonly<PropType>) {
   return (
     <html lang="en">

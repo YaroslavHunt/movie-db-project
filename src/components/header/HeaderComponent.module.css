@@ -1,3 +1,29 @@
+.header_component {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #222;
+    padding: 16px 32px;
+    border-bottom: 2px solid #333;
+}
+
+.header_left {
+    display: flex;
+    align-items: center;
+}
+
+.header_center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header_right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
 .header_button {
     background-color: #444;
     color: #ffffff;
@@ -10,23 +36,30 @@
     align-items: center;
     font-weight: bold;
     transition: background-color 0.3s, transform 0.2s, border-color 0.3s;
+    margin-right: 16px;
 }
 
 .header_button:hover {
     background-color: #555;
 }
 
-.header_button span {
-    margin-right: 8px;
-    font-size: 10px;
-}
-
-.header_button_link {
+.header_button_link_home, .header_button_link_movies {
     text-decoration: none;
     color: white;
 }
 
-.header_button_link:hover {
+.header_button_link_home:hover, .header_button_link_movies:hover {
     transform: scale(1.05);
-    color: palevioletred;
+}
+
+.user_info {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Відстань між зображенням і текстом */
+}
+
+.user_info img {
+    border-radius: 50%;
+    width: 30px; /* Розмір зображення */
+    height: 30px;
 }

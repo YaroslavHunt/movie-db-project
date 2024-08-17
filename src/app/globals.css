@@ -1,0 +1,20 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+
+.dark-mode {
+    background-color: #222;
+    color: #fff;
+}
+
+.light-mode {
+    background-color: #ffffff;
+    color: #282525;
+}
+
+.dark-mode div {
+    background-color: black;
+}

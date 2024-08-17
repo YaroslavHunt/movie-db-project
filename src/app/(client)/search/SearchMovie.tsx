@@ -2,6 +2,7 @@
 
 import React, {FC, useState} from 'react';
 import { IMovie } from "@/models/IMovie";
+import styles from './SerachMovie.module.css';
 
 interface SearchProps {
     initialResults: IMovie[];
@@ -28,28 +29,28 @@ const Search: FC<SearchProps> = ({ initialResults, initialQuery }) => {
     };
 
     return (
-        <div>
-            <input
-                type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search for movies"
-            />
-            <button onClick={handleSearch} disabled={loading}>
-                {loading ? 'Searching...' : 'Search'}
-            </button>
-            <div>
-                {results.length > 0 ? (
-                    results.map(movie => (
-                        <div key={movie.id}>
-                            <h3>{movie.title}</h3>
-                            <p>{movie.overview}</p>
-                        </div>
-                    ))
-                ) : (
-                    <h6>No results found</h6>
-                )}
+        <div className={styles.search_container}>
+            <div className={styles.search_bar}>
+                <input
+                    type="text"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="Search for movies"
+                    className={styles.search_input}
+                />
+                <button onClick={handleSearch} disabled={loading} className={styles.search_button}>
+                    {loading ? 'Searching...' : 'Search'}
+                </button>
             </div>
+            {results.length === 0 && (
+                <h6 className={styles.no_results}>No results found</h6>
+            )}
+            {results.length > 0 && results.map(movie => (
+                <div key={movie.id} className={styles.search_result_item}>
+                    <h3>{movie.title}</h3>
+                    <p>{movie.overview}</p>
+                </div>
+            ))}
         </div>
     );
 };

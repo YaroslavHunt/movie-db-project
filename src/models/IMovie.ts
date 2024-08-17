@@ -27,3 +27,10 @@ export interface IMovie{
     vote_average: number
     vote_count: number
 }
+
+export interface IMovieInfo {
+    title?: string,
+    release_date: string,
+    popularity: number,
+    overview: string,
+}

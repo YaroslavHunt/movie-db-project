@@ -10,9 +10,13 @@ const TopRatedMoviesList: FC<Interfaces> = async (results) => {
     return (
         <div className={styles.movies_list_component}>
             <h3>Top Rated</h3>
-            {topRatedMovies.map(movie => (
-                <MoviesListCardComponent movie={movie} key={movie.id} />
-            ))}
+            <div className={styles.movies_list_container}>
+                {topRatedMovies.map(movie => (
+                    <div className={styles.movie_card} key={movie.id}>
+                        <MoviesListCardComponent movie={movie} />
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };

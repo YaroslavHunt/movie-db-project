@@ -1,3 +1,41 @@
+.movie_page {
+    display: flex;
+    align-items: flex-start;
+    padding: 20px;
+}
 
+.poster_preview {
+    flex: 1;
+    margin-right: 20px;
+}
 
+.movie_info {
+    flex: 2;
+}
 
+.genre_badge_container {
+    margin-bottom: 20px;
+}
+
+.genre_badge_component {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Відстань між баджами */
+}
+
+.genre_budge {
+    background-color: #444;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.genre_budge:hover {
+    background-color: #555;
+    transform: scale(1.05);
+    color: palevioletred;
+}
