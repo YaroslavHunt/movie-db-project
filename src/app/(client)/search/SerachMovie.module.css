@@ -1,13 +1,12 @@
+
 .search_container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #222;
-    padding: 16px;
-    border-radius: 8px;
-    width: 20vw;
-    max-width: 600px;
+    position: relative;
+    width: fit-content;
     margin: 0 auto;
+
+    padding: 16px;
+    border-radius: 4px;
+    max-width: 600px;
 }
 
 .search_bar {
@@ -18,12 +17,12 @@
 
 .search_input {
     width: 80%;
-    padding: 10px 10px;
+    padding: 10px;
     font-size: 16px;
-    border: 2px solid #444;
+    border: 2px solid #555;
     border-radius: 4px;
     background-color: #333;
-    color: #fff;
+    color: #ffffff;
     margin-right: 10px;
     transition: border-color 0.3s;
 }
@@ -49,28 +48,66 @@
     transform: scale(1.05);
 }
 
-.no_results {
-    margin-top: 10px;
-    color: #fff;
-    font-size: 14px;
+.search_results_container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    background-color: #444;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    transition: max-height 0.3s ease-in, opacity 0.3s;
+    opacity: 0;
+    z-index: 1000;
 }
 
-/*.search_result_item {*/
-/*    position: absolute;*/
-/*    top: 100%; !* Розміщення під інпутом *!*/
-/*    left: 0;*/
-/*    right: 0;*/
+.search_results_container.open {
+    max-height: 200px;
+    opacity: 1;
+    overflow-y: auto;
+}
 
-/*    color: #fff;*/
-/*    padding: 10px;*/
-/*    border-radius: 8px;*/
-/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);*/
-/*    max-width: 300px;*/
-/*    z-index: 1000;*/
-/*}*/
+.search_results_container::-webkit-scrollbar {
+    width: 8px;
+}
 
-/*.search_result_item link {*/
-/*    margin: 5px 0 0;*/
-/*    font-size: 14px;*/
-/*    text-align: left;*/
-/*}*/
+.search_results_container::-webkit-scrollbar-track {
+    background: #333;
+    border-radius: 4px;
+}
+
+.search_results_container::-webkit-scrollbar-thumb {
+    background: #777;
+    border-radius: 4px;
+}
+
+.search_results_container::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
+}
+
+.search_result_item_link {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.search_result_item {
+    padding: 10px 14px;
+    border-bottom: 1px solid #555;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.search_result_item_link:hover {
+    color: palevioletred;
+}
+
+.no_results {
+    margin-top: 10px;
+    color: #ffffff;
+    font-size: 14px;
+    text-align: center;
+}

@@ -1,7 +1,7 @@
 'use client';
 
-import React, {FC, useEffect, useState} from 'react';
-import {IMovie} from "@/models/IMovie";
+import React, { FC, useEffect, useRef, useState } from 'react';
+import { IMovie } from "@/models/IMovie";
 import styles from './SerachMovie.module.css';
 import Link from "next/link";
 
@@ -10,14 +10,18 @@ interface SearchProps {
     initialQuery: string;
 }
 
-const Search: FC<SearchProps> = ({initialResults, initialQuery}) => {
+const Search: FC<SearchProps> = ({ initialResults, initialQuery }) => {
     const [query, setQuery] = useState(initialQuery);
     const [results, setResults] = useState<IMovie[]>([]);
     const [loading, setLoading] = useState(false);
+    const [showResults, setShowResults] = useState(false);
+
+    const searchContainerRef = useRef<HTMLDivElement>(null);
 
     const handleSearch = () => {
         if (query.trim() === '') {
             setResults([]);
+            setShowResults(false);
             return;
         }
 
@@ -25,15 +29,27 @@ const Search: FC<SearchProps> = ({initialResults, initialQuery}) => {
             movie.title.toLowerCase().includes(query.toLowerCase())
         );
         setResults(filteredMovies);
+        setShowResults(true);
     };
-
 
     useEffect(() => {
         handleSearch();
     }, [query]);
 
+    // Handle click outside search container
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (searchContainerRef.current && !searchContainerRef.current.contains(event.target as Node)) {
+                setShowResults(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
     return (
-        <div className={styles.search_container}>
+        <div ref={searchContainerRef} className={styles.search_container}>
             <div className={styles.search_bar}>
                 <input
                     type="text"
@@ -46,24 +62,30 @@ const Search: FC<SearchProps> = ({initialResults, initialQuery}) => {
                     {loading ? 'Searching...' : 'Search'}
                 </button>
             </div>
-            {query && results.length === 0 && (
-                <h6 className={styles.no_results}>No results found</h6>
-            )}
-            {query && results.length > 0 && results.map(movie => (
-                <div key={movie.id} className={styles.search_result_item}>
-                    <Link href={{
-                        pathname: '/movie/' + movie.id,
-                        query: {data: JSON.stringify(movie)}
-                    }}>{movie.original_title}</Link>
+            {showResults && (
+                <div className={`${styles.search_results_container} ${query ? styles.open : ''}`}>
+                    {results.length === 0 && (
+                        <h6 className={styles.no_results}>No results found</h6>
+                    )}
+                    {results.map(movie => (
+                        <div key={movie.id} className={styles.search_result_item}>
+                            <Link href={{
+                                pathname: '/movie/' + movie.id,
+                                query: { data: JSON.stringify(movie) }
+                            }}
+                                  className={styles.search_result_item_link}>
+                                {movie.original_title}
+                            </Link>
+                        </div>
+                    ))}
                 </div>
-                ))}
-</div>
-)
-;
-}
-;
+            )}
+        </div>
+    );
+};
 
 export default Search;
+
 
 
 
