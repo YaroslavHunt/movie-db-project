@@ -1,37 +1,37 @@
 'use client';
 
-import React, { FC, useState } from 'react';
-import { IMovie } from "@/models/IMovie";
+import React, {FC, useState, useEffect} from 'react';
+import {IMovie} from "@/models/IMovie";
 import styles from './SerachMovie.module.css';
+import Link from "next/link";
+import {imgUrl} from "@/constants/constants";
 
 interface SearchProps {
     initialResults: IMovie[];
     initialQuery: string;
 }
 
-const Search: FC<SearchProps> = ({ initialResults, initialQuery }) => {
+const Search: FC<SearchProps> = ({initialResults, initialQuery}) => {
     const [query, setQuery] = useState(initialQuery);
     const [results, setResults] = useState<IMovie[]>([]);
     const [loading, setLoading] = useState(false);
 
-    const handleSearch = async () => {
+    const handleSearch = () => {
         if (query.trim() === '') {
             setResults([]);
             return;
         }
 
-        setLoading(true);
-        try {
-            const filteredMovies = initialResults.filter(movie =>
-                movie.title.toLowerCase().includes(query.toLowerCase())
-            );
-            setResults(filteredMovies);
-        } catch (error) {
-            console.error('Error fetching movies:', error);
-        } finally {
-            setLoading(false);
-        }
+        const filteredMovies = initialResults.filter(movie =>
+            movie.title.toLowerCase().includes(query.toLowerCase())
+        );
+        setResults(filteredMovies);
     };
+
+
+    useEffect(() => {
+        handleSearch();
+    }, [query]);
 
     return (
         <div className={styles.search_container}>
@@ -52,15 +52,21 @@ const Search: FC<SearchProps> = ({ initialResults, initialQuery }) => {
             )}
             {query && results.length > 0 && results.map(movie => (
                 <div key={movie.id} className={styles.search_result_item}>
-                    <h3>{movie.title}</h3>
-                    <p>{movie.overview}</p>
+                    <Link href={{
+                        pathname: '/movie/' + movie.id,
+                        query: {data: JSON.stringify(movie)}
+                    }}>{movie.original_title}</Link>
                 </div>
-            ))}
-        </div>
-    );
-};
+                ))}
+</div>
+)
+;
+}
+;
 
 export default Search;
+
+
 
 
 

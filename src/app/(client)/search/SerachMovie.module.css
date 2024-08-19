@@ -54,3 +54,23 @@
     color: #fff;
     font-size: 14px;
 }
+
+/*.search_result_item {*/
+/*    position: absolute;*/
+/*    top: 100%; !* Розміщення під інпутом *!*/
+/*    left: 0;*/
+/*    right: 0;*/
+
+/*    color: #fff;*/
+/*    padding: 10px;*/
+/*    border-radius: 8px;*/
+/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);*/
+/*    max-width: 300px;*/
+/*    z-index: 1000;*/
+/*}*/
+
+/*.search_result_item link {*/
+/*    margin: 5px 0 0;*/
+/*    font-size: 14px;*/
+/*    text-align: left;*/
+/*}*/
