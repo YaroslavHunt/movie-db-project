@@ -1,10 +1,9 @@
 'use client';
 
-import React, {FC, useState, useEffect} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {IMovie} from "@/models/IMovie";
 import styles from './SerachMovie.module.css';
 import Link from "next/link";
-import {imgUrl} from "@/constants/constants";
 
 interface SearchProps {
     initialResults: IMovie[];
