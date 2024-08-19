@@ -1,6 +1,6 @@
 'use client';
 
-import React, {FC, useState} from 'react';
+import React, { FC, useState } from 'react';
 import { IMovie } from "@/models/IMovie";
 import styles from './SerachMovie.module.css';
 
@@ -11,10 +11,15 @@ interface SearchProps {
 
 const Search: FC<SearchProps> = ({ initialResults, initialQuery }) => {
     const [query, setQuery] = useState(initialQuery);
-    const [results, setResults] = useState<IMovie[]>(initialResults);
+    const [results, setResults] = useState<IMovie[]>([]);
     const [loading, setLoading] = useState(false);
 
     const handleSearch = async () => {
+        if (query.trim() === '') {
+            setResults([]);
+            return;
+        }
+
         setLoading(true);
         try {
             const filteredMovies = initialResults.filter(movie =>
@@ -42,10 +47,10 @@ const Search: FC<SearchProps> = ({ initialResults, initialQuery }) => {
                     {loading ? 'Searching...' : 'Search'}
                 </button>
             </div>
-            {results.length === 0 && (
+            {query && results.length === 0 && (
                 <h6 className={styles.no_results}>No results found</h6>
             )}
-            {results.length > 0 && results.map(movie => (
+            {query && results.length > 0 && results.map(movie => (
                 <div key={movie.id} className={styles.search_result_item}>
                     <h3>{movie.title}</h3>
                     <p>{movie.overview}</p>

@@ -3,9 +3,9 @@ import {IGenre} from "@/models/IGenre";
 
 export interface Interfaces {
     results: IMovie[],
-    page?: number ,
-    total_pages?: number,
-    total_results?: number
+    page: number | 1,
+    total_pages: number | 1,
+    total_results: number | 1
 }
 
 export interface totalPagesProps extends Interfaces{
