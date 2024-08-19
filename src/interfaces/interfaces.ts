@@ -1,7 +1,7 @@
 import {IMovie} from "@/models/IMovie";
 import {IGenre} from "@/models/IGenre";
 
-export interface Interfaces {
+export interface dataProps {
     results: IMovie[],
     page: number | 1,
     total_pages: number | 1,

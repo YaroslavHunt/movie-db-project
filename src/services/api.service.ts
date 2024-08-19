@@ -1,33 +1,28 @@
 import {baseUrl, imgUrl, options} from "@/constants/constants";
-import {Interfaces, IResMovieProps} from "@/interfaces/interfaces";
+import {dataProps, IResMovieProps} from "@/interfaces/interfaces";
 import {IGenre} from "@/models/IGenre";
 import {IMovie} from "@/models/IMovie";
 
+const getData = async ():Promise<dataProps> => {
+    return await fetch(baseUrl + '/discover/movie',
+        options).then(res => res.json());
+}
+
 
 const getTotalPages = async (): Promise<number> => {
-    const total = await getMoviesByPage();
+    const total = await getData();
     return total.total_pages;
 }
 
 const getAllMovies = async (page: number = 1): Promise<IMovie[]> => {
-    const total = await getTotalPages();
-    const allMovies = [];
+    const totalPages = await getTotalPages();
+    const allMovies:IMovie[] = [];
 
-    for (let i = page; i <= total; i++) {
+    for (let i = page; i <= totalPages; i++) {
         try {
-            const response = await fetch(baseUrl + '/discover/movie?page=' + i, options)
-                .then(res => {
-                    if (!res.ok) {
-                        throw new Error(`HTTP error! status: ${res.status}`);
-                    }
-                    return res.json();
-                });
+            const response = await getMoviesByPage(i);
 
-            if (!response.results || !Array.isArray(response.results)) {
-                throw new Error('Results are missing or undefined in the response.');
-            }
-
-            allMovies.push(...response.results);
+            allMovies.push(...response);
         } catch (error) {
             console.error('Failed to fetch movies:', error);
             break;
@@ -37,33 +32,26 @@ const getAllMovies = async (page: number = 1): Promise<IMovie[]> => {
     return allMovies;
 }
 
-const getTopRatedMovies = async (page: number = 1): Promise<IMovie[]> => {
+const getTopRatedMovies = async (sliceArg: number): Promise<IMovie[]> => {
     const allMovies = await getAllMovies();
 
     const sortedMovies = allMovies.length > 0 ?
         allMovies.sort((a, b) => b.vote_average - a.vote_average) : [];
 
-    return sortedMovies.slice(0, 16);
+    return sortedMovies.slice(0, sliceArg);
+}
+
+const getMoviesByPage = async (page: number = 1): Promise<IMovie[]> => {
+    const response = await fetch(baseUrl + '/discover/movie?page=' + page,
+        options).then(res => res.json());
+    return response.results;
 }
 
 
-
-
-const getMoviesByPage = async (page: number = 1): Promise<Interfaces> => {
-
-    const response: Interfaces = await fetch(baseUrl + '/discover/movie?page=' + page,
+const getAllMoviesByGenre = async (genreId: string, page: number = 1): Promise<IMovie[]> => {
+    const response: dataProps = await fetch(baseUrl + '/discover/movie?with_genres=' + genreId + '&page=' + page,
         options).then(res => res.json());
-
-    return response;
-}
-
-
-const getAllMoviesByGenre = async (genreId: string, page: number = 1): Promise<Interfaces> => {
-    const response: Interfaces = await fetch(baseUrl + '/discover/movie?with_genres=' + genreId + '&page=' + page,
-        options).then(res => res.json());
-
-
-    return response;
+    return response.results;
 }
 
 const getMovieById = async (id: number): Promise<IResMovieProps> => {
@@ -87,6 +75,8 @@ const getGenres = async (): Promise<IGenre[]> => {
 
 
 export {
+    getData,
+    getTotalPages,
     getAllMovies,
     getTopRatedMovies,
     getAllMoviesByGenre,

@@ -4,7 +4,7 @@ import MoviesListCardComponent from '@/components/movies-list-card/MoviesListCar
 import {getTopRatedMovies} from "@/services/api.service";
 
 const TopRatedMoviesList: FC = async () => {
-    const topRated = await getTopRatedMovies();
+    const topRated = await getTopRatedMovies(16);
 
     return (
         <div className={styles.movies_list_component}>
