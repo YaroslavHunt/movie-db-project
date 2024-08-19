@@ -15,7 +15,7 @@ export interface IResMovieProps {
 }
 
 export interface PaginationProps {
-    genre?: IGenre[]
+    genre?: IGenre
     currentPage: number,
     totalPages: number
 }

@@ -25,3 +25,4 @@ const MoviesPaginationComponent: FC<PaginationProps> = ({ currentPage, totalPage
 };
 
 export default MoviesPaginationComponent;
+

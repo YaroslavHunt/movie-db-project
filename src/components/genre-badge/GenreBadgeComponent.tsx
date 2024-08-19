@@ -3,12 +3,12 @@ import styles from "./GenreBadgeComponent.module.css";
 import {IGenre} from "@/models/IGenre";
 import Link from "next/link";
 
-interface Props {
+interface IProps {
     genres: IGenre[];
     genresIds: number[];
 }
 
-const GenreBadgeComponent: FC<Props> = async ({genresIds, genres}) => {
+const GenreBadgeComponent: FC<IProps> = ({genres, genresIds}) => {
 
 
     return (

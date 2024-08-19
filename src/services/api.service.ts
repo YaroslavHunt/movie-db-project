@@ -47,11 +47,16 @@ const getMoviesByPage = async (page: number = 1): Promise<IMovie[]> => {
     return response.results;
 }
 
-
 const getAllMoviesByGenre = async (genreId: string, page: number = 1): Promise<IMovie[]> => {
     const response: dataProps = await fetch(baseUrl + '/discover/movie?with_genres=' + genreId + '&page=' + page,
         options).then(res => res.json());
     return response.results;
+}
+
+const getTotalPagesOfMoviesByGenre = async (genreId: string): Promise<number> => {
+    const response: dataProps = await fetch(baseUrl + '/discover/movie?with_genres=' + genreId, options)
+        .then(res => res.json());
+    return response.total_pages;
 }
 
 const getMovieById = async (id: number): Promise<IResMovieProps> => {
@@ -80,6 +85,7 @@ export {
     getAllMovies,
     getTopRatedMovies,
     getAllMoviesByGenre,
+    getTotalPagesOfMoviesByGenre,
     getMoviesByPage,
     getMovieById,
     getGenres

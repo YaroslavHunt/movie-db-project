@@ -3,7 +3,7 @@ import styles from './PaginationComponent.module.css';
 import Link from 'next/link';
 import {PaginationProps} from "@/interfaces/interfaces";
 
-const GenresPaginationComponent: FC<PaginationProps> = ({ currentPage, totalPages, genre}) => {
+const GenresPaginationComponent: FC<PaginationProps> = ({ currentPage, totalPages, genre }) => {
     const previousPage = currentPage > 1 ? currentPage - 1 : null;
     const nextPage = currentPage < totalPages ? currentPage + 1 : null;
 
@@ -12,7 +12,8 @@ const GenresPaginationComponent: FC<PaginationProps> = ({ currentPage, totalPage
             {previousPage && (
                 <Link href={{
                     pathname: '/genre/[id]' + previousPage,
-                    query: {page: previousPage, data: JSON.stringify(genre)}}} className={styles.toggle_button_link}>
+                    query: {page: previousPage, data: JSON.stringify(genre)}
+                }} className={styles.toggle_button_link}>
                     <button>&#8249;</button>
                 </Link>
             )}
@@ -20,7 +21,8 @@ const GenresPaginationComponent: FC<PaginationProps> = ({ currentPage, totalPage
             {nextPage && (
                 <Link href={{
                     pathname: '/genre/[id]' + nextPage,
-                    query: {page: nextPage, data: JSON.stringify(genre)}}} className={styles.toggle_button_link}>
+                    query: {page: nextPage, data: JSON.stringify(genre)}
+                }} className={styles.toggle_button_link}>
                     <button>&#8250;</button>
                 </Link>
             )}

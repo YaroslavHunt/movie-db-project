@@ -1,15 +1,14 @@
 import React from 'react';
-import {getAllMoviesByGenre} from "@/services/api.service";
+import {getAllMoviesByGenre, getTotalPagesOfMoviesByGenre} from "@/services/api.service";
 import MoviesListComponent from "@/components/movies-list/MoviesListComponent";
-import {IMovie} from "@/models/IMovie";
 import GenresPaginationComponent from "@/components/pagination/GenresPaginationComponent";
 
 interface Params {
     searchParams: {
-        data?:string,
-        name?:string,
+        data:string,
+        name:string,
         id: string,
-        page?: string
+        page: string
     }
 }
 
@@ -22,16 +21,15 @@ const GenrePage = async ({searchParams}: Params) => {
         genre = JSON.parse(searchParams.data)
     }
     const currentPage = searchParams.page ? +searchParams.page : 1;
-    const moviesResponse = await getAllMoviesByGenre(genre.id, currentPage);
-    const moviesByGenre: IMovie[] = moviesResponse.results;
-
+    const moviesByGenre = await getAllMoviesByGenre(genre.id, currentPage);
+    const totalPages = await getTotalPagesOfMoviesByGenre(genre.id);
 
     return (
         <div>
-            <MoviesListComponent results={moviesByGenre}/>
+            <MoviesListComponent movies={moviesByGenre}/>
             <GenresPaginationComponent
                 currentPage={currentPage}
-                totalPages={moviesResponse.total_pages || 1}
+                totalPages={totalPages}
                 genre={genre}
             />
         </div>

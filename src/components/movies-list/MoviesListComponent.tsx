@@ -1,18 +1,18 @@
-import React, {FC} from 'react';
-import styles from './MoviesListComponent.module.css'
+import React, { FC } from 'react';
+import styles from './MoviesListComponent.module.css';
 import MoviesListCardComponent from "@/components/movies-list-card/MoviesListCardComponent";
-import {Interfaces} from "@/interfaces/interfaces";
+import { IMovie } from "@/models/IMovie";
 
+interface Props {
+    movies: IMovie[];
+}
 
-const MoviesListComponent:FC<Interfaces> = (results) => {
-
-    let res = results.results;
-
+const MoviesListComponent: FC<Props> = ({ movies }) => {
     return (
         <div className={styles.movies_list_container}>
-                {
-                    res.map(movie => <MoviesListCardComponent movie={movie} key={movie.id}/>)
-                }
+            {movies.map(movie => (
+                <MoviesListCardComponent movie={movie} key={movie.id} />
+            ))}
         </div>
     );
 };

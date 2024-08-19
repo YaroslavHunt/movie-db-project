@@ -13,7 +13,7 @@ interface SearchProps {
 const Search: FC<SearchProps> = ({ initialResults, initialQuery }) => {
     const [query, setQuery] = useState(initialQuery);
     const [results, setResults] = useState<IMovie[]>([]);
-    const [loading, setLoading] = useState(false);
+    const [loading] = useState(false);
     const [showResults, setShowResults] = useState(false);
 
     const searchContainerRef = useRef<HTMLDivElement>(null);
@@ -36,7 +36,6 @@ const Search: FC<SearchProps> = ({ initialResults, initialQuery }) => {
         handleSearch();
     }, [query]);
 
-    // Handle click outside search container
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (searchContainerRef.current && !searchContainerRef.current.contains(event.target as Node)) {
